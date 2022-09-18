@@ -131,17 +131,6 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void notShouldSetIncreaseVolume() {
-        Radio radio = new Radio();
-
-        radio.setCurrentVolume(10);
-        radio.increaseVolume();
-
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
 
     @Test
     public void ShouldSetPrevVolume() {
@@ -156,13 +145,51 @@ public class RadioTest {
     }
 
     @Test
-    public void notShouldSetPrevVolume() {
-        Radio radio = new Radio();
+    public void TestCurrentStation() {
+        Radio radio = new Radio(10);
+        radio.setCurrentRadioStation(9);
+        int expected = 9;
+        int actual = radio.getCurrentRadioStation();
 
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void TestNextStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStation(29);
+        radio.nextRadioStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void TestPrevStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStation(0);
+        radio.prevRadioStation();
+
+        int expected = 29;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void TestNextVolume() {
+        Radio radio = new Radio(101);
+        radio.setCurrentVolume(100);
+        radio.increaseVolume();
+
+        int expected = 100;
+        int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void TestPrevVolume() {
+        Radio radio = new Radio(100);
         radio.setCurrentVolume(0);
         radio.prevVolume();
 
-        int expected = 10;
+        int expected = 0;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
